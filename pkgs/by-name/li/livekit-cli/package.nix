@@ -1,28 +1,23 @@
 { lib
 , buildGoModule
 , fetchFromGitHub
+, go_1_22
 }:
-
-buildGoModule rec {
+buildGoModule.override { go = go_1_22; } rec {
   pname = "livekit-cli";
-  version = "1.5.1";
-
+  version = "2.2.1";
   src = fetchFromGitHub {
     owner = "livekit";
     repo = "livekit-cli";
     rev = "v${version}";
-    hash = "sha256-J5tg3nm2pEemEZcIpObcxH+G4ByzvUtoSyy92CcWr6M=";
+    hash = "sha256-yt3alb2/0QXTQ6bk5IsRTQDOm77r53JXunJ7lTYwNYQ=";
   };
-
-  vendorHash = "sha256-ywHTIuiZaoY3p7hTsnImcCpuwMXHQZcnRsWerIlOU4o=";
-
-  subPackages = [ "cmd/livekit-cli" ];
+  vendorHash = "sha256-1Q/N0FwtJ27552E1j7kdkhPohASHTf+gy6L4QhHwK2g=";
 
   meta = with lib; {
     description = "Command line interface to LiveKit";
     homepage = "https://livekit.io/";
     license = licenses.asl20;
-    maintainers = with maintainers; [ mgdelacroix ];
     mainProgram = "livekit-cli";
   };
 }
